@@ -43,5 +43,3 @@ process.on('unhandledRejection', (err) => {
 });
 
 init();
-//kamu fitri yaa
-//iya kamu khailah ya
