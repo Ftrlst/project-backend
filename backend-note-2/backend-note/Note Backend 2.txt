@@ -1,0 +1,14 @@
+Perhatikan file services/mysql/NoteService.js
+	1. di sini kita membuat service baru yang memiliki method yang sama dengan yang kemarin namun perbedaaannya adalah penggunaan pool untuk menyimpan data note ke dalam database (tidak di dalam variabel)
+	2. perhatikan pada constructor NoteService, dia menerima 1 parameter yaitu pool. pool ini akan dikirim dari index.js. 
+	3. pool disimpan di dalam attribut this._pool milik NoteService agar bisa digunakan di method"nya
+	4. di setiap method kita mengganti tempat penyimpanan data (kemarin variabel) menjadi ke dalam database melalui pool
+	5. perhatikan perintah yang digunakan ada yang this._pool.query ada juga yang this._pool.execute
+	6. coba ikuti dulu aja sambil mencoba memahami
+Perhatikan index.js
+	1. service yang sebelumnya kita import dari inMemory, sekarang kita import dari folder service/mysql (baris 7)
+	2. import pool dari dalam utils/database/pool (ini berisi objek pool untuk terhubung ke database mysql)
+	3. pada pembuatan service (baris 13) objek pool dimasukkan menjadi parameter constructor NoteService
+
+
+Coba dulu ya, ini script saya tulis buru" blm sempat cek jalan atau tidak. jika error coba cari penyelesaiannya sambil tanya di grup

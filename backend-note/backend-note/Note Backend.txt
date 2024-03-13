@@ -1,0 +1,29 @@
+ada beberapa yang berubah. 
+1. Download, ekstrak, buka folder dengan vscode
+2. jalankan npm install di terminal vscode agar semua library terinstall
+3. Buka index.js dan temukan script baru tentang: 
+	a. [baris 12] Objek NoteService -> di sini kita kumpulkan functions CRUD note ke dalam memory
+	b. [baris 24] Objek NoteService dikirim ke plugin note melalui options
+4. Buka service/inMemory/NoteService.js maka kamu akan bisa melihat sebuah class yang menampung method" untuk CRUD ke dalam variable this._notes (di sini data-data notes tersimpan)
+5. Buka plugins/notes/handler.js ada cukup banyak yang berubah
+	a. di project ini tidak menggunakan database, saya hanya akan menunjukkan pola yang baru saja namun data-data notes akan tersimpan di dalam variabel / memory oleh service
+	b. Note dibuat menjadi class agar dapat menerima 1 objek service tunggal (singleton)
+	c. perhatikan baris 5 dan 6, NoteHandler akan menerima service sebagai parameter di constructor. Service ini adalah objek noteServices yang tadi telah dibuat di index.js. melalui plugin akan sampai ke dalam NoteHandler ini. 
+	d. perhatikan method addNoteHandler, pada baris 43 akan memanggil method addNote yang dimiliki service dengan mengirimkan data-data notes (title, content, writer) sebagai parameternya. 
+	e. jadi kita tidak meletakkan variabel notes di handler melainkan kita pusatkan di service
+	f. method addNote akan mengembalikan noteId lalu akan dikirimkan dalam response oleh handler.
+	g. baca method-method lain pada NoteHandler maka kamu akan mendapati pola yang sama yaitu handler menerima data, memanggil method milik service untuk menjalankan operasi CRUD.
+6. Jika kamu sudah melihat pola pada NoteHandler, sekarang buka routes.js milik plugin note
+	a. di sini juga berbeda, routes kita jadikan sebuah function yang menerima 1 parameter yaitu handler (berupa objek), lalu masing" path akan mengarhkan ke method-method yang ada pada objek handler
+	b. kita tidak melakukan import handler dari routes seperti sebelumnya karena sekarang routes akan menerima objek handler yang telah dibuat oleh plugin.
+7. Buka plugins/notes/index.js (INDEX PLUGIN) lalu perhatikan:
+	a. pada baris 2 dilakukan import NoteHandler (tadinya di routes)
+	b. pada baris 9 dibuat OBJEK handler dengan mengirimkan OBJEK service. ingat tadi pada index.js objek NotesService telah dibuat dan dikirimkan ke plugin melalui option
+	c. baris ke 10 routes dibuat dengan melempar handler yang telah dibuat di baris 9.
+8. Baca kembali petunjuk ini, temukan polanya ya. Saat ini project sudah sangat menerapkan OOP. Perhatikan:
+	a. Objek NoteService hanya ada 1 dan objek ini dikirimkan ke dalam plugin. 
+	b. Objek NoteHandler hanya ada 1 dibuat oleh plugin (plugins/notes/index.js) lalu dikirimkan ke dalam routes
+	c. NoteHandler memanfaatkan objek NoteService untuk melakukan CRUD data notes
+	
+
+Baca index.js. ada script baru di
